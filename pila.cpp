@@ -21,36 +21,46 @@ char *buscarEquipo(int);
 int main()
 {
     
+    int op, equipo;
+    
     do{
-        push( rearElemento() );
+        push( crearElemento() );
     }while(nuevoElemento());
     
     w = p;
     
-    /*
-    for(int i=0; i<2; i++){
-        cout<< i+1<< ".- Nombre: "<< p->nombre <<endl;
-        w = p->enlace;
-        p = w;
-    }
-    */
+    cout << "\nElige una opción: (1) Buscar elemento (2) Quitar los elementos de una pila"<<endl;
+    cin >> op;
     
-    cout<< "El nombre es: "<< buscarEquipo(3);
-    
-    int i=0;
-    /*
-    while(NULL != ( w=pop() ) ){
-        cout << i+1 <<".- Nombre: "<< w->nombre <<endl;
-        delete w;
-        i++;
+    switch(op){
+        case 1:
+            cout << "Escribe el número de equipo: ";
+            cin >> equipo;
+            
+            if(NULL!=buscarEquipo(equipo)){
+                cout << "\nEl nombre es: " << buscarEquipo(equipo) << endl;
+            }else{
+                cout << "\nNo se encontraron resultados para la búsqueda" << endl;
+            }
+            break;
+        
+        case 2:
+            while(NULL != ( w=pop() ) ){
+                cout << "Se ha quitado de la pila a " << w->nombre <<endl;
+                delete w;
+            }
+            break;
+        
+        default:
+            cout << "¡Ups! has elegido una opción inválida" << endl;
     }
-    */
+    
     return 0;
 }
 
 bool nuevoElemento(){
     char c;
-    cout<< "\n Otra caja? ";
+    cout<< "¿Deseas agregar otro elemento? (presiona 's' o 'S'): ";
     cin>> c;
     return c == 's' || c == 'S';
 }
