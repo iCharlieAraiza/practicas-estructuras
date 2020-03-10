@@ -2,63 +2,102 @@
 
 using namespace std;
 
-
 struct jugador_e{
-	char nombre[25];
-	int numero;
-	int equipo;
-	struct jugador_e *enlace;
+    char nombre[25];
+    int numero;
+    int equipo;
+    struct jugador_e *enlace;
 };
-struct jugador_e *q=NULL; 
 
-jugador_e *hacerJugador();
+struct jugador_e *p = NULL, *w;
+
+bool nuevoElemento();
+jugador_e *crearElemento();
+
 void push(jugador_e*);
 jugador_e *pop();
+char *buscarEquipo(int);
 
 int main()
 {
-    struct jugador_e *p=NULL; 
     
-    for(int i = 0; i < 2; i++){
-        push( hacerJugador());
+    do{
+        push( rearElemento() );
+    }while(nuevoElemento());
+    
+    w = p;
+    
+    /*
+    for(int i=0; i<2; i++){
+        cout<< i+1<< ".- Nombre: "<< p->nombre <<endl;
+        w = p->enlace;
+        p = w;
     }
+    */
     
+    cout<< "El nombre es: "<< buscarEquipo(3);
     
-    for(int i = 0; i < 2; i++){
-        q = pop();
-        cout<<p->nombre<<endl;
+    int i=0;
+    /*
+    while(NULL != ( w=pop() ) ){
+        cout << i+1 <<".- Nombre: "<< w->nombre <<endl;
+        delete w;
+        i++;
     }
-
+    */
     return 0;
 }
 
-jugador_e *hacerJugador(){
-    struct jugador_e *p;
-    p = new jugador_e;
-    
-    cout << "Escribe el nombre" << endl;
-    cin >> p->nombre;
-    
-    cout << "Escribe el número" << endl;
-    cin >> p->numero;
-    
-    cout << "Escribe el equipo" << endl;
-    cin >> p->equipo;
-    
-    return p==NULL ? NULL : p;
+bool nuevoElemento(){
+    char c;
+    cout<< "\n Otra caja? ";
+    cin>> c;
+    return c == 's' || c == 'S';
 }
 
-void push(jugador_e *p){
-    p->enlace = q;
-    q = p;
+jugador_e *crearElemento(){
+    jugador_e *q;
+    q = new jugador_e;
+    
+    cout<<"Escribe el nombre: ";
+    cin>> q->nombre;
+    
+    cout<<"Escribe el numero: ";
+    cin>> q->numero;
+    
+    cout<<"Escribe el equipo: ";
+    cin>> q->equipo;
+    
+    cout<<endl;
+    
+    return q;
+}
+
+void push(jugador_e *q){
+    q->enlace = p;
+    p = q;
 }
 
 jugador_e *pop(){
-    jugador_e *p;
-    p = q;
-    if(p != NULL){
+    jugador_e *q;
+    q = p;
+    if(p!=NULL){
         p = p->enlace;
     }
-        
-    return p;
+    return q;
+}
+
+char *buscarEquipo(int equipo){
+    jugador_e *q;
+    q=p;
+    
+    while(p!=NULL){
+        if(p->equipo == equipo){
+            return p->nombre;
+        }
+        q = p->enlace;
+        p = q;
+    }
+    
+    return NULL;
 }
