@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h> 
 
 using namespace std;
 
@@ -55,6 +56,13 @@ void deleteElement(Node *tree){
     deleteElement(p->right);
 }
 
+
+int getNivel(Node *p){
+    if(p==NULL)
+        return 0;
+    return 1 + max( getNivel(p->left), getNivel(p->right) );
+}
+
 int main()
 {
 
@@ -67,6 +75,9 @@ int main()
     
     printTree(tree);
     
+    cout << "El nivel es: " << getNivel(tree)-1;
+    
+    deleteElement(tree);
+    
     return 0;
 }
-
