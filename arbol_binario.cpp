@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -46,6 +45,16 @@ void printTree(Node *tree){
     printTree(tree->right);
 }
 
+void deleteElement(Node *tree){
+    if(tree == NULL)
+        return;
+    Node *p = tree;
+    
+    delete tree;
+    deleteElement(p->left);
+    deleteElement(p->right);
+}
+
 int main()
 {
 
@@ -60,3 +69,4 @@ int main()
     
     return 0;
 }
+
