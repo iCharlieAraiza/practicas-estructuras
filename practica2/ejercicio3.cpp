@@ -65,7 +65,12 @@ bool agregarOtroElemento(){
 }
 
 void imprimirLista(Moviedata *p, int n){
-    for(int i = 0; i<n, i++){
-        cout << p->movieTitle << endl;
+    for(int i = 0; i<=n; i++){
+        cout << endl << "Nombre: " << p->movieTitle << endl;
+        cout << "Director: " << p->movieDirector << endl;
+        cout << "Año: " << p->yearReleased << endl;
+        cout << "Duración: " << p->runningTime << endl;
+        
+        p = p->next;
     }
 }
