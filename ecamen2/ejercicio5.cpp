@@ -100,3 +100,15 @@ void imprimirArbolEntre(Nodo *nodo){
 
 }
 
+void borrar(Nodo *nodo){
+    if(nodo==NULL){
+        return;
+    }
+    Nodo *p = nodo;
+
+    borrar(p->left);
+    borrar(p->right);
+
+    delete nodo;
+
+}
