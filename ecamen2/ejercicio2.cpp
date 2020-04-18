@@ -16,12 +16,12 @@ s_jugador *crearElemento();
 
 void push(s_jugador*);
 s_jugador *pop();
-char *buscarEquipo(int);
+char *buscarNumero(int);
 
 int main()
 {
     
-    int op, equipo;
+    int op, numero;
     
     do{
         push( crearElemento() );
@@ -29,9 +29,30 @@ int main()
     
     w = p;
 
-    while(NULL != ( w=pop() ) ){
-        cout << "Se ha quitado de la pila a " << w->nombre <<endl;
-        delete w;
+    cout << "\nElige una opción: (1) Buscar elemento (2) Quitar los elementos de una pila"<<endl;
+    cin >> op;
+
+    switch(op){
+        case 1:
+            cout << "Escribe el número del jugador: ";
+            cin >> numero;
+
+            if(NULL!=buscarNumero(numero)){
+                cout << "\nEl nombre es: " << buscarNumero(numero) << endl;
+            }else{
+                cout << "\nNo se encontraron resultados para la búsqueda" << endl;
+            }
+            break;
+
+        case 2:
+            while(NULL != ( w=pop() ) ){
+                cout << "Se ha quitado de la pila a " << w->nombre <<endl;
+                delete w;
+            }
+            break;
+
+        default:
+            cout << "¡Ups! has elegido una opción inválida" << endl;
     }
 
     return 0;
@@ -74,4 +95,19 @@ s_jugador *pop(){
         p = p->siguiente;
     }
     return q;
+}
+
+char *buscarNumero(int numero){
+    s_jugador *q;
+    q=p;
+
+    while(p!=NULL){
+        if(p->numero == numero){
+            return p->nombre;
+        }
+        q = p->siguiente;
+        p = q;
+    }
+
+    return NULL;
 }
