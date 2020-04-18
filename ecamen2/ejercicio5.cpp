@@ -12,27 +12,8 @@ void imprimirArbolPre(Nodo *);
 void imprimirArbolPost(Nodo *);
 void imprimirArbolEntre(Nodo *);
 
-void deleteElement(Nodo *tree){
-    if(tree == NULL)
-        return;
-    Nodo *p = tree;
-
-    delete tree;
-    deleteElement(p->left);
-    deleteElement(p->right);
-}
-
-
-int getNivel(Nodo *p){
-    if(p==NULL)
-        return 0;
-    return 1 + max( getNivel(p->left), getNivel(p->right) );
-}
-
 int main()
 {
-
-
     struct Nodo *tree = new Nodo;
     tree->key = 19;
 
@@ -63,7 +44,7 @@ int main()
     cout << endl << "En entreorden: " << endl;
     imprimirArbolEntre(tree);
 
-    //deleteElement(tree);
+    borrar(tree);
 
     return 0;
 }
